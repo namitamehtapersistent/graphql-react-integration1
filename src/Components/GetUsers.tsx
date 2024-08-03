@@ -15,12 +15,14 @@ interface GetDataResponse {
 
 function GetUsers() {
   const { error, loading, data } = useQuery<GetDataResponse>(GET_DATA_QUERY);
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<any>([]);
   useEffect(() => {
     console.log(GET_DATA_QUERY);
     if (data) {
-      console.log(data.weather);
-     // setUsers(data.getAllUsers);
+      const res: any = data;
+      console.log(data);
+      setUsers(res);
+      console.log(users.weathers);
     }
   }, [data]);
 
@@ -32,7 +34,7 @@ function GetUsers() {
       <br />
       {error && `Error! ${error.message}`}
       <br />
-      {users.map((val: any) => {
+      {users?.weathers?.map((val: any) => {
         return <h1> {val.temperatureC}</h1>;
       })}
     </div>
